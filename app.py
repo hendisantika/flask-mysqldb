@@ -18,3 +18,12 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+@app.route('/simpan', methods=["POST"])
+def simpan():
+    nama = request.form['nama']
+    cur = mysql.connection.cursor()
+    cur.execute("INSERT INTO computer (data) VALUES (%s)", (nama,))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
