@@ -27,3 +27,13 @@ def simpan():
     cur.execute("INSERT INTO computer (data) VALUES (%s)", (nama,))
     mysql.connection.commit()
     return redirect(url_for('home'))
+
+
+@app.route('/update', methods=["POST"])
+def update():
+    id_data = request.form['id']
+    nama = request.form['nama']
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE computer SET data=%s WHERE id=%s", (nama, id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
