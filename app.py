@@ -16,10 +16,6 @@ def home():
     cur.close()
     return render_template('home.html', computers=rv)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
 @app.route('/simpan', methods=["POST"])
 def simpan():
     nama = request.form['nama']
@@ -45,3 +41,7 @@ def hapus(id_data):
     cur.execute("DELETE FROM computer WHERE id=%s", (id_data,))
     mysql.connection.commit()
     return redirect(url_for('home'))
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
